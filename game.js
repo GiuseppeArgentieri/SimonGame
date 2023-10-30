@@ -7,11 +7,41 @@ var userClickedPattern = [];
 var started = false;
 var level = 0;
 
-$(document).keypress(function() {
+$(document).keydown(function(ev) {
   if (!started) {
     $("#level-title").text("Level " + level);
     nextSequence();
     started = true;
+  }
+  else{
+    key = ev.key.toLowerCase();
+    if(["g", "r", "y", "b"].includes(key))
+    {
+    switch(key){
+      case "g":
+        userChosenColour = "green";
+        break;
+
+      case "r":
+        userChosenColour = "red";
+        break;
+
+      case "y":
+        userChosenColour = "yellow";
+        break;
+
+      case "b":
+        userChosenColour = "blue";
+        break;
+
+      default:
+        console.log();
+    }
+    userClickedPattern.push(userChosenColour);
+    playSound(userChosenColour);
+    animatePress(userChosenColour);
+    checkAnswer(userClickedPattern.length-1);
+  }
   }
 });
 
@@ -26,9 +56,12 @@ $(".btn").click(function() {
   checkAnswer(userClickedPattern.length-1);
 });
 
+
 function checkAnswer(currentLevel) {
 
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
+      //la lunghezza deve essere la stessa per chiamare nextsequence() altrimenti non fa nulla
+      //next sequence azzera il vettore userClickedPattern
       if (userClickedPattern.length === gamePattern.length){
         setTimeout(function () {
           nextSequence();

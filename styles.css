@@ -24,6 +24,16 @@ body {
   width: 200px;
   border: 10px solid black;
   border-radius: 20%;
+  text-align: center; /* Allineamento orizzontale al centro */
+  line-height: 200px; /* Allineamento verticale al centro */
+}
+
+.centered-text {
+  display: inline-block;
+  font-size: 48px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  color: black;
 }
 
 .game-over {
